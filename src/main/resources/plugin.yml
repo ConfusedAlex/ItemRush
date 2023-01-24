@@ -1,0 +1,7 @@
+name: ItemRush
+main: itemrush.ItemRush
+version: 1
+commands:
+  itemrush:
+    description: itemrush command
+    usage: /itemrush
