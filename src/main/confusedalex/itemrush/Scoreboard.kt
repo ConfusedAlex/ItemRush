@@ -19,12 +19,16 @@ class Scoreboard(private val gameManager: GameManager) {
         obj?.displaySlot = DisplaySlot.SIDEBAR
         obj?.displayName = "ItemRush!"
 
-        val itemCounter: Team? = board?.registerNewTeam("itemCounter")
-        itemCounter?.addEntry("$GREEN Items:")
-        itemCounter!!.prefix = "$YELLOW + ${gameManager.pointMap[p.uniqueId]}"
-//        obj?.getScore("$GREEN Items:")?.score = 12
+        obj?.getScore("$GOLD 1. $WHITE ${gameManager.getPlayerByScoreboardPlace(1)}")?.score = 10
+        obj?.getScore("$GOLD 2. $WHITE ${gameManager.getPlayerByScoreboardPlace(2)}")?.score = 11
+        obj?.getScore("$GOLD 3. $WHITE ${gameManager.getPlayerByScoreboardPlace(3)}")?.score = 12
 
-        p.scoreboard = board
+        obj?.getScore("$GREEN Items: $WHITE ${gameManager.pointMap[p.uniqueId]}")?.score = 14
+
+
+        if (board != null) {
+            p.scoreboard = board
+        }
     }
 
     fun updateScoreboard(p: Player) {

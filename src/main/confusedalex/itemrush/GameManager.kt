@@ -8,9 +8,20 @@ import java.util.*
 import java.util.logging.Level
 
 class GameManager {
-    val pointMap = HashMap<UUID, Int?>()
+    var pointMap = HashMap<UUID, Int?>()
     val itemMap: HashMap<UUID, ArrayList<String>> = HashMap()
     val scoreboard: Scoreboard = Scoreboard(this)
+
+    fun getPlayerByScoreboardPlace (i: Int) : Int? {
+        val sortedPointMap = pointMap.toSortedMap(compareByDescending { it }).toList()
+        val size = sortedPointMap.size - 1
+
+        if (i > size) {
+            return sortedPointMap[size].second
+        }
+
+        return sortedPointMap[i].second
+    }
 
     fun switchGameState(gameStates: GameStates) {
         if (gameStates == GameStates.STARTING) {
