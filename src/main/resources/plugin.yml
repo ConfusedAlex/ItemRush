@@ -1,6 +1,7 @@
 name: ItemRush
 main: itemrush.ItemRush
 version: 1
+api-version: 1.16
 commands:
   itemrush:
     description: itemrush command
