@@ -5,7 +5,7 @@ import org.bukkit.WorldCreator
 import org.bukkit.plugin.java.JavaPlugin
 
 class ItemRush : JavaPlugin() {
-    val gameManager = GameManager()
+    val gameManager = GameManager(this)
 
     @Override
     override fun onEnable() {
@@ -15,7 +15,7 @@ class ItemRush : JavaPlugin() {
 
     @Override
     override fun onDisable() {
-        val wc = WorldCreator("playground")
+
     }
 
 }
