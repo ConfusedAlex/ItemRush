@@ -1,14 +1,12 @@
-package itemrush
+package itemrushfirst
 
+import itemrush.GameManager
 import net.md_5.bungee.api.ChatColor.GOLD
+import net.md_5.bungee.api.ChatColor.GREEN
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.scoreboard.DisplaySlot
-import org.bukkit.scoreboard.Score
-import org.bukkit.scoreboard.Scoreboard
-import org.bukkit.scoreboard.Team
-import java.awt.Color.*
+import net.md_5.bungee.api.ChatColor.WHITE
 
 
 class Scoreboard(private val gameManager: GameManager) {
@@ -16,26 +14,29 @@ class Scoreboard(private val gameManager: GameManager) {
     fun setScoreboard(p: Player) {
         val board = Bukkit.getScoreboardManager()?.newScoreboard
         val obj = board?.registerNewObjective("ItemRush", "dummy")
-        obj?.displaySlot = DisplaySlot.SIDEBAR
         obj?.displayName = "ItemRush!"
 
-        obj?.getScore("$GOLD 1. $WHITE ${gameManager.getPlayerByScoreboardPlace(1)}")?.score = 10
-        obj?.getScore("$GOLD 2. $WHITE ${gameManager.getPlayerByScoreboardPlace(2)}")?.score = 11
-        obj?.getScore("$GOLD 3. $WHITE ${gameManager.getPlayerByScoreboardPlace(3)}")?.score = 12
+        obj?.getScore("$GOLD 1. ${gameManager.getPlayerNameByScoreboardPlace(3)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(3)}")?.score = 14
+        obj?.getScore("$GOLD 2. ${gameManager.getPlayerNameByScoreboardPlace(2)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(2)}")?.score = 13
+        obj?.getScore("$GOLD 3. ${gameManager.getPlayerNameByScoreboardPlace(1)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(1)}")?.score = 12
 
-        obj?.getScore("$GREEN Items: $WHITE ${gameManager.pointMap[p.uniqueId]}")?.score = 14
+        obj?.getScore("$GREEN Items: $WHITE ${gameManager.pointMap[p.uniqueId]}")?.score = 10
 
+        println(p.name)
+        println(gameManager.pointMap[p.uniqueId])
+
+        obj?.displaySlot = DisplaySlot.SIDEBAR
 
         if (board != null) {
             p.scoreboard = board
         }
     }
 
-    fun updateScoreboard(p: Player) {
+    fun updateScoreboard() {
 
-        val board: Scoreboard = p.scoreboard
-
-        board.getTeam("itemCounter")?.prefix = "$GOLD ${gameManager.pointMap[p.uniqueId]}"
+        for (p: Player in Bukkit.getOnlinePlayers()) {
+            setScoreboard(p)
+        }
 
     }
 
