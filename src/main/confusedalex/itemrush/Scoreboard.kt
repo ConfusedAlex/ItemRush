@@ -1,12 +1,9 @@
-package itemrushfirst
+package itemrush
 
-import itemrush.GameManager
-import net.md_5.bungee.api.ChatColor.GOLD
-import net.md_5.bungee.api.ChatColor.GREEN
+import net.md_5.bungee.api.ChatColor.*
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.scoreboard.DisplaySlot
-import net.md_5.bungee.api.ChatColor.WHITE
 
 
 class Scoreboard(private val gameManager: GameManager) {
@@ -14,11 +11,11 @@ class Scoreboard(private val gameManager: GameManager) {
     fun setScoreboard(p: Player) {
         val board = Bukkit.getScoreboardManager()?.newScoreboard
         val obj = board?.registerNewObjective("ItemRush", "dummy")
-        obj?.displayName = "ItemRush!"
+        obj?.displayName = "ItemRush"
 
-        obj?.getScore("$GOLD 1. ${gameManager.getPlayerNameByScoreboardPlace(3)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(3)}")?.score = 14
+        obj?.getScore("$GOLD 1. ${gameManager.getPlayerNameByScoreboardPlace(1)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(1)}")?.score = 14
         obj?.getScore("$GOLD 2. ${gameManager.getPlayerNameByScoreboardPlace(2)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(2)}")?.score = 13
-        obj?.getScore("$GOLD 3. ${gameManager.getPlayerNameByScoreboardPlace(1)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(1)}")?.score = 12
+        obj?.getScore("$GOLD 3. ${gameManager.getPlayerNameByScoreboardPlace(3)} $WHITE ${gameManager.getPlayerPointsByScoreboardPlace(3)}")?.score = 12
 
         obj?.getScore("$GREEN Items: $WHITE ${gameManager.pointMap[p.uniqueId]}")?.score = 10
 
