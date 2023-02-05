@@ -1,6 +1,6 @@
 package itemrush
 
-import org.bukkit.Material
+import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
@@ -9,18 +9,21 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityPickupItemEvent
 import org.bukkit.event.entity.FoodLevelChangeEvent
-import org.bukkit.event.inventory.CraftItemEvent
 import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerMoveEvent
 
 
 class Events(private val itemRush: ItemRush) : Listener {
 
     @EventHandler
+    fun onPlayerJoinEvent(event: PlayerJoinEvent) {
+        event.player.teleport(Bukkit.getWorld("world")!!.spawnLocation)
+    }
+
+    @EventHandler
     fun playerMoveEvent (event: PlayerMoveEvent) {
-        if (itemRush.gameManager.running) return
-        event.isCancelled = true
+        if (itemRush.gameManager.gameState == GameStates.STARTING) event.isCancelled = true
     }
 
     @EventHandler()
@@ -32,7 +35,6 @@ class Events(private val itemRush: ItemRush) : Listener {
     @EventHandler
     fun onPlayerDamageEvent(event: EntityDamageEvent) {
         if (event.entityType != EntityType.PLAYER) return
-
         event.isCancelled = true
     }
 
