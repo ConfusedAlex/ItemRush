@@ -2,7 +2,6 @@ package itemrush
 
 import net.md_5.bungee.api.ChatColor.AQUA
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import org.bukkit.scheduler.BukkitRunnable
@@ -33,7 +32,7 @@ class Bossbar(private val gameManager: GameManager) {
                 } else {
                     bossBar.setTitle("$AQUA Zeit verbleibend: $minute:$second")
                 }
-                bossBar.progress = (time / seconds).toDouble()
+                bossBar.progress = (time.toDouble() / seconds.toDouble())
                 time--
             }
         }
